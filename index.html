@@ -3,23 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <title>Clock</title>
-    <script defer src="js/main.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script defer src="js/clock.js"></script>
+    <script defer src="js/stopwatch.js"></script>
+    <script defer src="js/alarm.js"></script>
 </head>
 <body>
 
 <header>
-    <nav>
-        <ul></ul>
+    <nav class="pb-3">
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-clock-tab" data-bs-toggle="tab" data-bs-target="#nav-clock" type="button" role="tab" aria-controls="nav-clock" aria-selected="true">Clock</button>
+            <button class="nav-link" id="nav-alarm-tab" data-bs-toggle="tab" data-bs-target="#nav-stopwatch" type="button" role="tab" aria-controls="nav-stopwatch" aria-selected="false">Stop Watch</button>
+            <button class="nav-link" id="nav-stopwatch-tab" data-bs-toggle="tab" data-bs-target="#nav-alarm" type="button" role="tab" aria-controls="nav-alarm" aria-selected="false">Alarm</button>
+            <button class="nav-link" id="nav-countdown-tab" data-bs-toggle="tab" data-bs-target="#nav-countdown" type="button" role="tab" aria-controls="nav-countdown" aria-selected="false">Countdown</button>
+        </div>
     </nav>
 </header>
 
 <main>
-    <section id="clockContainer">
-        <time id="mainClock"></time>
-    </section>
+
+
+    <div class="tab-content" id="nav-tabContent">
+
+        <div class="tab-pane fade show active" id="nav-clock" role="tabpanel" aria-labelledby="nav-clock-tab">
+            <div class="d-flex justify-content-center d-flex flex-column justify-content-center align-items-center">
+                <h3 class="display-1">Local time</h3>
+                <h1 id="mainClock"></h1>
+                <div class="justify-content-center flex-column text-center">
+                    <button id="playMagicSound" class="btn btn-success">Clícame, es mágico</button>
+                    <h2 id="sorpresa" class="text-justify"></h2>
+                    <div id="sorpresa2" class="justify-content-center flex-column text-center"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="nav-stopwatch" role="tabpanel" aria-labelledby="nav-stopwatch-tab">
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                <h3 class="display-1">Stopwatch</h3>
+                <p id="lap">
+                    <span id="hours">00</span>
+                    :
+                    <span id="minutes">00</span>
+                    :
+                    <span id="seconds">00</span>
+                    .
+                    <span id="tenths">000</span>
+                </p>
+                <div>
+                    <button id="startButton" class="btn btn-primary">Start</button>
+                    <button id="stopButton" class="btn btn-warning">Stop</button>
+                    <button id="resetButton" class="btn btn-danger">Reset</button>
+                    <button id="setLap" class="btn btn-info">Lap</button>
+                </div>
+
+                <div class="pt-3 pb-3">
+                    <h2>Lap list</h2>
+                </div>
+
+                <div>
+                    <ul id="lapList"></ul>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="nav-alarm" role="tabpanel" aria-labelledby="nav-alarm-tab">
+            <div class="d-flex flex-column justify-content-center align-items-center">
+
+                <h3 class="display-1">Alarms</h3>
+
+                <form action="javascript:void(0);" onsubmit="event.preventDefault()">
+                    <input type="number" id="alarmHours" min="00" max="23" name="alarmHours">
+                    <input type="number" id="alarmMinutes" min="00" max="59" name="alarmMinutes">
+                    <input type="number" id="alarmSeconds" min="00" max="59" name="alarmSeconds">
+                    <button type="submit" id="setAlarm" class="btn btn-info">Set alarm time</button>
+                </form>
+
+                <div>
+                    <h3 class="display-3">Saved alarms</h3>
+                    <ul id="alarmList"></ul>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="nav-countdown" role="tabpanel" aria-labelledby="nav-countdown-tab">
+            <div class="d-flex flex-column justify-content-center">
+                <h3 class="display-1">Countdown</h3>
+            </div>
+        </div>
+    </div>
+
+    <section id="alarmContainer"></section>
+    <section id="stopwatchContainer"></section>
+    <section id="countdownContainer"></section>
+
 </main>
 
 <footer></footer>
 
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 </body>
 </html>
