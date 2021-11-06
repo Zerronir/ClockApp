@@ -90,13 +90,13 @@
                 <h3 class="display-1">Alarms</h3>
 
                 <form action="javascript:void(0);" onsubmit="event.preventDefault()">
-                    <select type="number" id="alarmHours" min="00" max="23" name="alarmHours">
+                    <select id="alarmHours" name="alarmHours">
                         <option value="">-- Selecciona una hora --</option>
                     </select>
-                    <select type="number" id="alarmMinutes" min="00" max="59" name="alarmMinutes">
+                    <select id="alarmMinutes" name="alarmMinutes">
                         <option value="">-- Selecciona los minutos --</option>
                     </select>
-                    <select type="number" id="alarmSeconds" min="00" max="59" name="alarmSeconds">
+                    <select id="alarmSeconds" name="alarmSeconds">
                         <option value="">-- Selecciona los segundos --</option>
                     </select>
                     <button type="submit" id="setAlarm" class="btn btn-info">Set alarm time</button>

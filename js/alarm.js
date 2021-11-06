@@ -38,7 +38,8 @@ button.onclick = () => {
         setAlarm(alarmHours.value, alarmMinutes.value, alarmSeconds.value);
         logAlarm(alarmHours.value, alarmMinutes.value, alarmSeconds.value);
     } else {
-        alert("input value is invalid, please check it")
+        // Sacamos un toast con mensaje de error
+        errorToast();
         alarmHours.classList.add('border');
         alarmHours.classList.add('border-danger');
 
@@ -52,7 +53,7 @@ button.onclick = () => {
 
 // Validamos el input de la hora a la que queremos setear la alarma
 const validateInput = (val) => {
-    return (!isNaN(val));
+    return val !== "";
 }
 
 let alarmController;
@@ -108,8 +109,9 @@ const logAlarm = (hours, minutes, seconds) => {
 
     // Añade la alarma a la lista
     let li = document.createElement("li");
+    li.id = `alarmLI${alarmsArray.length.toString()}`
     li.setAttribute("data-id", (alarmsArray.length).toString())
-    li.innerHTML = `${hours < 10 ? "0" + hours : hours}:${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+    li.innerHTML = `${hours}:${minutes}:${seconds}`;
 
     // Creamos el botón para eliminar alarmas
     let deleteAlarm = document.createElement("button");
@@ -158,8 +160,11 @@ const deleteItem = (item) => {
         }
     }
 
-    let el = $(`alarm${id}`);
-    $('alarmList').removeChild(el);
+    // Eliminamos el li de la lista
+    let el = $(`alarmLI${id}`);
+    el.remove();
+
+    deleteToast(); // Mostramos un mensaje de que se ha eliminado la alarma
 }
 
 // Función para activar o desactivar las alarmas
@@ -177,7 +182,7 @@ const changeStatus = (item) => {
     }
 }
 
-
+// Toast para cuando se añade una alarma correctamente
 const toast = (mensaje) => {
     bs5Utils.Toast.show({
         type: 'primary',
@@ -187,7 +192,30 @@ const toast = (mensaje) => {
         delay: 0,
         dismissible: true
     });
+}
 
+// Toast para cuando hay un error del validador
+const errorToast = () => {
+    bs5Utils.Toast.show({
+        type: 'danger',
+        icon: `<i class="far fa-check-circle fa-lg me-2"></i>`,
+        title: 'Error!!!',
+        content: `Los datos introducidos son inválidos, por favor rellena todo correctamente`,
+        delay: 0,
+        dismissible: true
+    });
+}
+
+// Toast para cuando hay un error del validador
+const deleteToast = () => {
+    bs5Utils.Toast.show({
+        type: 'warning',
+        icon: `<i class="far fa-check-circle fa-lg me-2"></i>`,
+        title: 'Alarma eliminada',
+        content: `La alarma se ha eliminado correctamente`,
+        delay: 0,
+        dismissible: true
+    });
 }
 
 const editAlarm = () => {
@@ -228,6 +256,7 @@ const populateMinutes = () => {
     }
 }
 
+// Rama alarma
 const populateSeconds = () => {
     let parent = $('alarmSeconds');
 
