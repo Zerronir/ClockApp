@@ -25,6 +25,19 @@
 
 <main>
 
+    <!-- Alert para cuando se añade una alarma nueva -->
+    <div role="alert" aria-live="assertive" aria-atomic="true" id="toast" class="toast" data-autohide="false">
+        <div class="toast-header">
+            <img src="./" class="rounded mr-2" alt="...">
+            <strong class="mr-auto">Clock App</strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body">
+            Alarma añadida a las <span id="alarma"></span>
+        </div>
+    </div>
 
     <div class="tab-content" id="nav-tabContent">
 
@@ -76,9 +89,15 @@
                 <h3 class="display-1">Alarms</h3>
 
                 <form action="javascript:void(0);" onsubmit="event.preventDefault()">
-                    <input type="number" id="alarmHours" min="00" max="23" name="alarmHours">
-                    <input type="number" id="alarmMinutes" min="00" max="59" name="alarmMinutes">
-                    <input type="number" id="alarmSeconds" min="00" max="59" name="alarmSeconds">
+                    <select id="alarmHours" name="alarmHours">
+                        <option value="">-- Selecciona una hora --</option>
+                    </select>
+                    <select id="alarmMinutes" name="alarmMinutes">
+                        <option value="">-- Selecciona los minutos --</option>
+                    </select>
+                    <select id="alarmSeconds" name="alarmSeconds">
+                        <option value="">-- Selecciona los segundos --</option>
+                    </select>
                     <button type="submit" id="setAlarm" class="btn btn-info">Set alarm time</button>
                 </form>
 

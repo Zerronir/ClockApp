@@ -20,12 +20,13 @@ let magic = $("playMagicSound");
 magic.onclick = () => {
     $('sorpresa').innerHTML = "";
     $('sorpresa2').innerHTML = "";
-    console.log("has sido rick roleado")
+
     setTimeout(() => {
         $('sorpresa').innerHTML = "Enhorabuena, un alumno ha aprendido lo que puede hacer con el objeto Audio y has sido Rick Roleado";
         let img = document.createElement("img");
         img.setAttribute("src", "./resources/images/rick-rickroll.gif");
         $('sorpresa2').appendChild(img);
+
         let clearButton = document.createElement("button");
         clearButton.setAttribute("onclick", "clearJoke()");
         clearButton.classList.add("btn")
@@ -37,8 +38,10 @@ magic.onclick = () => {
 }
 
 const clearJoke = () => {
+
     $('sorpresa').innerHTML = "";
     $('sorpresa2').innerHTML = "";
+
     let magicSong = new Audio('./resources/audio/sorpresa.mp3');
     magicSong.pause();
 }
