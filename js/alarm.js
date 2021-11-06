@@ -228,6 +228,8 @@ const populateMinutes = () => {
     }
 }
 
+// Rama alarma
+
 const populateSeconds = () => {
     let parent = $('alarmSeconds');
 
