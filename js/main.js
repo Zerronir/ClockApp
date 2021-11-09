@@ -77,5 +77,5 @@ const printSavedAlarm = (alarm) => {
 
     $('alarmList').appendChild(li);
 
-    alarmsArray.push(alarm)
+    alarmsArray.push(alarm);
 }
