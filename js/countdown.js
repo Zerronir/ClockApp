@@ -13,7 +13,7 @@ const startCountdown = (deadLine, timeout) => {
         // Calculamos los tiempos
 
 
-    }, typeof timeout !== "undefined" ? timeout : 1000); // Se actualiza cada segundo
+    }, timeout !== "" ? timeout : 1000); // Se actualiza cada segundo
 }
 
 const stopTheCountdown = () => {

@@ -78,7 +78,6 @@ const setAlarm = () => {
                 seconds === parseInt(alarmsArray[i].alarmSeconds) &&
                 alarmsArray[i].isActive === true
             ) {
-                console.log("true");
                 playAlarmSound();
             }
         }
@@ -138,6 +137,10 @@ const logAlarm = (hours, minutes, seconds) => {
 
     $('alarmList').appendChild(li);
 
+    // Vacíamos el formulario
+    alarmHours.value = ''
+    alarmMinutes.value = ''
+    alarmSeconds.value = ''
 
     // Añadimos el texto al toast
     let mensaje = `${alarm.alarmHours}:${alarm.alarmMinutes}:${alarm.alarmSeconds}`;
@@ -150,7 +153,7 @@ const logAlarm = (hours, minutes, seconds) => {
 // Función para eliminar alarmas de la lista y de la array
 const deleteItem = (item) => {
     let id = item.getAttribute("data-id");
-    console.log(id);
+
     // Eliminamos el objeto de la array
     for (let i = 0; i < alarmsArray.length; i++) {
         if(parseInt(alarmsArray[i].alarmId) === parseInt(id)) {

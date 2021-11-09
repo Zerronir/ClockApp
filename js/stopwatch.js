@@ -26,13 +26,8 @@ let timeHours; // Este será el intervalo de refresco de las horas
 // Creamos la función al hacer click en el botón de start
 // esta función recibirá la orden de activar el cronometro
 start.onclick = () => {
-    console.log("start clicked")
     clearInterval(time);
-    clearInterval(timeMinutes);
-    clearInterval(timeHours);
     time = setInterval(startTimerSeconds, 10);
-    timeMinutes = setInterval(startTimerMinutes, 100);
-    timeHours = setInterval(startTimerMinutes, 100);
 }
 
 // Paramos el cronometro pero no lo reiniciamos
@@ -43,9 +38,6 @@ stop.onclick = () => {
 // Reiniciamos el cronometro
 reset.onclick = () => {
     clearInterval(time);
-    clearInterval(timeHours);
-    clearInterval(timeMinutes);
-    console.log("reset clicked")
 
     hours = 0;
     minutes = 0;
@@ -65,31 +57,68 @@ setLap.onclick = () => {
     let lap = document.createElement('li');
     lap.innerHTML = $('lap').innerHTML;
     lapList.appendChild(lap);
+    saveState();
 }
 
 // Arrancamos el cronometro con esta función
 const startTimerSeconds = () => {
     tenths++; // Incrementamos los milisegundos
+    t.innerHTML = tenths;
 
-    if(tenths < 100 && tenths < 9) {
-        t.innerHTML = '';
+    if(tenths < 10) {
+        t.innerHTML = `00${tenths}`;
+    }
+
+    if(tenths < 100) {
         t.innerHTML = `0${tenths}`;
     }
 
     if(tenths > 99) {
         seconds++;
-        s.innerHTML = seconds;
         tenths = 0;
+        t.innerHTML = '000';
+        s.innerHTML = seconds;
     }
 
-    if (seconds < 10) {
+    if(seconds < 10) {
         s.innerHTML = `0${seconds}`;
     }
 
     if(seconds > 59) {
         minutes++;
+        seconds = 0;
+        tenths = 0;
+        t.innerHTML = '000';
         s.innerHTML = '00';
+        m.innerHTML = `${minutes}`;
     }
+
+    if(minutes < 10) {
+        m.innerHTML = `0${minutes}`;
+    }
+
+    if(minutes > 59) {
+        hours++;
+        minutes = 0;
+        seconds = 0;
+        tenths = 0;
+        t.innerHTML = '000';
+        s.innerHTML = '00';
+        m.innerHTML = '00';
+        h.innerHTML = `${hours}`;
+    }
+
+    if(hours < 10) {
+        h.innerHTML = `0${hours}`;
+    }
+
+    if(hours === 1) {
+        setLap();
+        reset.click();
+        start.click();
+    }
+
+
 }
 
 const startTimerMinutes = () => {
@@ -108,4 +137,12 @@ const startTimerMinutes = () => {
     }
 }
 
+const saveState = () => {
+    let currentTime = '';
+    let chrono = {
+        time: '',
+        status: ''
+    }
 
+    localStorage.setItem('chronoStatus', JSON.stringify(chrono));
+}
