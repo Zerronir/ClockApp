@@ -89,15 +89,21 @@
                 <h3 class="display-1">Alarms</h3>
 
                 <form action="javascript:void(0);" onsubmit="event.preventDefault()">
-                    <select id="alarmHours" name="alarmHours">
+                    <input list="alarmHours" id="alarmHoursOptions" placeholder="Hours">
+                    <datalist id="alarmHours">
                         <option value="">-- Selecciona una hora --</option>
-                    </select>
-                    <select id="alarmMinutes" name="alarmMinutes">
+                    </datalist>
+
+
+                    <input list="alarmMinutes" id="alarmMinutesOptions" placeholder="Minutes">
+                    <datalist id="alarmMinutes">
                         <option value="">-- Selecciona los minutos --</option>
-                    </select>
-                    <select id="alarmSeconds" name="alarmSeconds">
+                    </datalist>
+
+                    <input list="alarmSeconds" id="alarmSecondsOptions" placeholder="Seconds">
+                    <datalist id="alarmSeconds">
                         <option value="">-- Selecciona los segundos --</option>
-                    </select>
+                    </datalist>
                     <button type="submit" id="setAlarm" class="btn btn-info">Set alarm time</button>
                 </form>
 

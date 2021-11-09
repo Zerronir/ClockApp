@@ -8,9 +8,9 @@ window.onload = () => {
     populateSeconds();
 }
 
-let alarmHours = $('alarmHours');
-let alarmMinutes = $('alarmMinutes');
-let alarmSeconds = $('alarmSeconds');
+let alarmHours = $('alarmHoursOptions');
+let alarmMinutes = $('alarmMinutesOptions');
+let alarmSeconds = $('alarmSecondsOptions');
 let button = $('setAlarm');
 let alarmsArray = []; // Array donde guardaremos el objeto de la alarma
 
@@ -106,7 +106,7 @@ const logAlarm = (hours, minutes, seconds) => {
     alarmsArray.push(alarm);
 
     // Guardar la alarma en el localStorage del navegador
-    localStorage.setItem(`alarm${alarmsArray.length}`, alarm);
+    localStorage.setItem(`alarms`, JSON.stringify(alarmsArray));
 
     // Añade la alarma a la lista
     let li = document.createElement("li");
@@ -182,12 +182,14 @@ const changeStatus = (item) => {
     for (let i = 0; i < alarmsArray.length; i++) {
         if(parseInt(alarmsArray[i].alarmId) === parseInt(id)) {
             alarmsArray[i].isActive = !alarmsArray[i].isActive; // Cambiamos el estado de la alarma
-
+            if (alarmsArray[i].isActive === true) activateAlarm();
+            if (alarmsArray[i].isActive === false) deactivateAlarm();
             // Reiniciamos el intervalo de la alarma para que lea los cambios si se han ejecutado
             clearInterval(alarmController);
             setAlarm();
         }
     }
+    localStorage.setItem('alarms', JSON.stringify(alarmsArray));
 }
 
 // Toast para cuando se añade una alarma correctamente
@@ -197,7 +199,7 @@ const toast = (mensaje) => {
         icon: `<i class="far fa-check-circle fa-lg me-2"></i>`,
         title: 'Alarma creada!',
         content: `La alarma ha sido creada para las ${mensaje}`,
-        delay: 0,
+        delay: 2000,
         dismissible: true
     });
 }
@@ -209,7 +211,7 @@ const errorToast = () => {
         icon: `<i class="far fa-check-circle fa-lg me-2"></i>`,
         title: 'Error!!!',
         content: `Los datos introducidos son inválidos, por favor rellena todo correctamente`,
-        delay: 0,
+        delay: 2000,
         dismissible: true
     });
 }
@@ -221,7 +223,31 @@ const deleteToast = () => {
         icon: `<i class="far fa-check-circle fa-lg me-2"></i>`,
         title: 'Alarma eliminada',
         content: `La alarma se ha eliminado correctamente`,
-        delay: 0,
+        delay: 2000,
+        dismissible: true
+    });
+}
+
+// Toast para avisar al usuario de que ha activado la alarma
+const activateAlarm = () => {
+    bs5Utils.Toast.show({
+        type: 'success',
+        icon: `<i class="far fa-check-circle fa-lg me-2"></i>`,
+        title: 'Alarma eliminada',
+        content: `La alarma se ha activado correctamente`,
+        delay: 2000,
+        dismissible: true
+    });
+}
+
+// Toast para avisar al usuario de que ha desactivado la alarma
+const deactivateAlarm = () => {
+    bs5Utils.Toast.show({
+        type: 'success',
+        icon: `<i class="far fa-check-circle fa-lg me-2"></i>`,
+        title: 'Alarma eliminada',
+        content: `La alarma se ha desactivado correctamente`,
+        delay: 2000,
         dismissible: true
     });
 }
@@ -276,4 +302,8 @@ const populateSeconds = () => {
 
         parent.appendChild(option);
     }
+}
+
+const saveAlarmState = () => {
+
 }

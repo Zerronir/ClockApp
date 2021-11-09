@@ -1,8 +1,16 @@
+window.onload = () => {
+    alert('TU MADRE ES PUTA')
+    console.log("HOLA")
+    // Comprobamos el contenido del localstorage al cargar la página
+    let chrono = localStorage.getItem('chronoStatus');
+    console.log(chrono);
+}
+
 let hours = 0;
 let minutes = 0;
 let seconds = 0;
 let tenths = 0;
-
+let timerStatus;
 
 // Definimos los elementos de minuts, segundos y milisegundos
 
@@ -28,16 +36,19 @@ let timeHours; // Este será el intervalo de refresco de las horas
 start.onclick = () => {
     clearInterval(time);
     time = setInterval(startTimerSeconds, 10);
+    timerStatus = 'running';
 }
 
 // Paramos el cronometro pero no lo reiniciamos
 stop.onclick = () => {
     clearInterval(time);
+    timerStatus = 'paused';
 }
 
 // Reiniciamos el cronometro
 reset.onclick = () => {
     clearInterval(time);
+    timerStatus = 'reset';
 
     hours = 0;
     minutes = 0;
@@ -69,7 +80,7 @@ const startTimerSeconds = () => {
         t.innerHTML = `00${tenths}`;
     }
 
-    if(tenths < 100) {
+    if(tenths < 100 && tenths > 10) {
         t.innerHTML = `0${tenths}`;
     }
 
@@ -137,12 +148,26 @@ const startTimerMinutes = () => {
     }
 }
 
+// Guardamos el estado del cronometro para cuando volvamos a entrar a la app
 const saveState = () => {
-    let currentTime = '';
     let chrono = {
-        time: '',
-        status: ''
+        hours: hours,
+        minutes: minutes,
+        seconds: seconds,
+        tenths: tenths,
+        status: timerStatus
     }
 
     localStorage.setItem('chronoStatus', JSON.stringify(chrono));
+}
+
+window.onunload = () => {
+    saveState();
+}
+
+const loadChrono = () => {
+    console.log("HOLA")
+    // Comprobamos el contenido del localstorage al cargar la página
+    let chrono = localStorage.getItem('chronoStatus');
+    console.log(chrono);
 }
