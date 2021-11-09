@@ -170,8 +170,13 @@ const deleteItem = (item) => {
     // Eliminamos el li de la lista
     let el = $(`alarmLI${id}`);
     el.remove();
-
     deleteToast(); // Mostramos un mensaje de que se ha eliminado la alarma
+
+    if(alarmsArray.length === 0) {
+        localStorage.removeItem('alarms');
+    } else {
+        localStorage.setItem('alarms', JSON.stringify(alarmsArray))
+    }
 
 }
 
@@ -302,8 +307,4 @@ const populateSeconds = () => {
 
         parent.appendChild(option);
     }
-}
-
-const saveAlarmState = () => {
-
 }
