@@ -2,12 +2,6 @@
 
 const bs5Utils = new Bs5Utils();
 
-window.onload = () => {
-    populateHours();
-    populateMinutes();
-    populateSeconds();
-}
-
 let alarmHours = $('alarmHoursOptions');
 let alarmMinutes = $('alarmMinutesOptions');
 let alarmSeconds = $('alarmSecondsOptions');

@@ -1,16 +1,8 @@
-window.onload = () => {
-    alert('TU MADRE ES PUTA')
-    console.log("HOLA")
-    // Comprobamos el contenido del localstorage al cargar la página
-    let chrono = localStorage.getItem('chronoStatus');
-    console.log(chrono);
-}
-
 let hours = 0;
 let minutes = 0;
 let seconds = 0;
 let tenths = 0;
-let timerStatus;
+let timerStatus = 'stopped';
 
 // Definimos los elementos de minuts, segundos y milisegundos
 
@@ -163,11 +155,4 @@ const saveState = () => {
 
 window.onunload = () => {
     saveState();
-}
-
-const loadChrono = () => {
-    console.log("HOLA")
-    // Comprobamos el contenido del localstorage al cargar la página
-    let chrono = localStorage.getItem('chronoStatus');
-    console.log(chrono);
 }
