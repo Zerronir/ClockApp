@@ -37,16 +37,16 @@ magic.onclick = () => {
     playMagicSound();
 }
 
+let magicSong = new Audio('./resources/audio/sorpresa.mp3');
+
+const playMagicSound = () => {
+    magicSong.play();
+}
+
 const clearJoke = () => {
 
     $('sorpresa').innerHTML = "";
     $('sorpresa2').innerHTML = "";
 
-    let magicSong = new Audio('./resources/audio/sorpresa.mp3');
     magicSong.pause();
-}
-
-const playMagicSound = () => {
-    let magicSong = new Audio('./resources/audio/sorpresa.mp3');
-    magicSong.play();
 }

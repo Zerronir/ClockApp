@@ -2,11 +2,35 @@
 
 const bs5Utils = new Bs5Utils();
 
+ class Validator {
+    // Validamos el input de la hora a la que queremos setear la alarma
+    validateInput = (val) => {
+        return val !== "";
+    }
+
+    validateHours = (value) => {
+        if (parseInt(value) > 23 || parseInt(value) < 0) return false;
+        return true;
+    }
+
+    validateMinutes = (value) => {
+        if (parseInt(value) > 59 || parseInt(value) < 0) return false;
+        return true;
+    }
+
+    validateSeconds = (value) => {
+        if (parseInt(value) > 59 || parseInt(value) < 0) return false;
+        return true;
+    }
+}
+
+const v = new Validator();
+
 let alarmHours = $('alarmHoursOptions');
 let alarmMinutes = $('alarmMinutesOptions');
 let alarmSeconds = $('alarmSecondsOptions');
 let button = $('setAlarm');
-let alarmsArray = []; // Array donde guardaremos el objeto de la alarma
+ let alarmsArray = []; // Array donde guardaremos el objeto de la alarma
 
 let input = document.getElementsByTagName("input");
 
@@ -27,7 +51,13 @@ alarmSeconds.onfocus = () => {
 
 button.onclick = () => {
 
-    if(validateInput(alarmHours.value) && validateInput(alarmMinutes.value) && validateInput(alarmSeconds.value)) {
+    if(v.validateInput(alarmHours.value) &&
+        v.validateHours(alarmHours.value) &&
+        v.validateInput(alarmMinutes.value) &&
+        v.validateMinutes(alarmMinutes.value) &&
+        v.validateInput(alarmSeconds.value) &&
+        v.validateSeconds(alarmSeconds.value)
+        ) {
         setAlarm(alarmHours.value, alarmMinutes.value, alarmSeconds.value);
         logAlarm(alarmHours.value, alarmMinutes.value, alarmSeconds.value);
     } else {
@@ -46,16 +76,12 @@ button.onclick = () => {
     }
 }
 
-// Validamos el input de la hora a la que queremos setear la alarma
-const validateInput = (val) => {
 
-    return val !== "";
-}
 
 let alarmController;
 
 // Asignamos la alarma y esperamos a que funcione, cuando funcione emitiremos un modal y un sonido cuando salte el modal
-const setAlarm = () => {
+ const setAlarm = () => {
     clearInterval(alarmController);
 
     alarmController = setInterval(() => {
@@ -253,52 +279,4 @@ const deactivateAlarm = () => {
 
 const editAlarm = () => {
 
-}
-
-// Rellenamos las horas
-const populateHours = () => {
-    let parent = $('alarmHours');
-
-    // Con un bucle creamos los elementos de las horas que añadiremos al select de las horas
-    for (let i = 0; i < 24; i++) {
-        let option = document.createElement("option")
-
-        // Si la hora es menor a 10 le añadimos un 0 por consistencia de datos
-        let hour = i < 10 ? '0'+i : i;
-
-        // Añadimos el valor al select y le asignamos el texto también
-        option.setAttribute("value", hour);
-        option.innerHTML = hour;
-
-        // Añadimos el option al select
-        parent.appendChild(option);
-    }
-
-}
-
-const populateMinutes = () => {
-    let parent = $('alarmMinutes');
-
-    for (let i = 0; i < 60; i++) {
-        let option = document.createElement("option")
-        let minutes = i < 10 ? '0'+i : i;
-        option.setAttribute("value", minutes);
-        option.innerHTML = minutes;
-
-        parent.appendChild(option);
-    }
-}
-
-// Rama alarma
-const populateSeconds = () => {
-    let parent = $('alarmSeconds');
-
-    for (let i = 0; i < 60; i++) {
-        let option = document.createElement("option")
-        let seconds = i < 10 ? '0'+i : i;
-        option.setAttribute("value", seconds);
-        option.innerHTML = seconds;
-
-        parent.appendChild(option);
-    }
 }

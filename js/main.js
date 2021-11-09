@@ -79,3 +79,50 @@ const printSavedAlarm = (alarm) => {
 
     alarmsArray.push(alarm);
 }
+
+ const populateHours = () => {
+    let parent = $('alarmHours');
+
+    // Con un bucle creamos los elementos de las horas que añadiremos al select de las horas
+    for (let i = 0; i < 24; i++) {
+        let option = document.createElement("option")
+
+        // Si la hora es menor a 10 le añadimos un 0 por consistencia de datos
+        let hour = i < 10 ? '0' + i : i;
+
+        // Añadimos el valor al select y le asignamos el texto también
+        option.setAttribute("value", hour);
+        option.innerHTML = hour;
+
+        // Añadimos el option al select
+        parent.appendChild(option);
+    }
+
+}
+
+ const populateMinutes = () => {
+    let parent = $('alarmMinutes');
+
+    for (let i = 0; i < 60; i++) {
+        let option = document.createElement("option")
+        let minutes = i < 10 ? '0' + i : i;
+        option.setAttribute("value", minutes);
+        option.innerHTML = minutes;
+
+        parent.appendChild(option);
+    }
+}
+
+
+ const populateSeconds = () => {
+    let parent = $('alarmSeconds');
+
+    for (let i = 0; i < 60; i++) {
+        let option = document.createElement("option")
+        let seconds = i < 10 ? '0' + i : i;
+        option.setAttribute("value", seconds);
+        option.innerHTML = seconds;
+
+        parent.appendChild(option);
+    }
+}
