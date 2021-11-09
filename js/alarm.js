@@ -41,6 +41,7 @@ button.onclick = () => {
         // Sacamos un toast con mensaje de error
         errorToast();
 
+        // Le damos color a los bordes del select para indicar el error
         alarmHours.classList.add('border');
         alarmHours.classList.add('border-danger');
 
@@ -142,6 +143,11 @@ const logAlarm = (hours, minutes, seconds) => {
     // Añadimos el texto al toast
     let mensaje = `${alarm.alarmHours}:${alarm.alarmMinutes}:${alarm.alarmSeconds}`;
 
+    // Reseteamos los selects
+    $('alarmHours').value = '';
+    $('alarmMinutes').value = '';
+    $('alarmSeconds').value = '';
+
     toast(mensaje);
     clearInterval(alarmController);
     setAlarm();
@@ -165,8 +171,7 @@ const deleteItem = (item) => {
 
 
     // Eliminamos el li de la lista
-    let el = $(`alarmLI${id}`);
-    el.remove();
+    let el = $(`alarmLI${id}`).remove();
 
     deleteToast(); // Mostramos un mensaje de que se ha eliminado la alarma
 
