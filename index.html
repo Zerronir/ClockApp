@@ -119,7 +119,7 @@
         </div>
 
         <div class="tab-pane fade" id="nav-countdown" role="tabpanel" aria-labelledby="nav-countdown-tab">
-            <div class="d-flex flex-column justify-content-center">
+            <div class="d-flex flex-column justify-content-center align-items-center">
                 <h3 class="display-1">Countdown</h3>
                 <form action="javascript:void(0);" onsubmit="event.preventDefault()">
                     <input list="countdownHours" id="countdownHoursOptions" placeholder="Hours">
@@ -138,7 +138,9 @@
                         <option value="">-- Selecciona los segundos --</option>
                     </datalist>
 
-                    <button type="submit" id="setCountdown" class="btn btn-info">Set alarm time</button>
+                    <button type="submit" id="setCountdown" class="btn btn-info">Set counter</button>
+                    <button type="submit" id="stopCountdown" class="btn btn-warning">Stop the counter</button>
+                    <button type="submit" id="resetCountdown" class="btn btn-danger">Reset the counter</button>
                 </form>
 
                 <div>
