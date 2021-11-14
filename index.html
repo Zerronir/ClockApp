@@ -9,6 +9,7 @@
 
     <script defer src="js/clock.js"></script>
     <script defer src="js/stopwatch.js"></script>
+    <script defer src="js/countdown.js"></script>
     <script defer src="js/alarm.js"></script>
     <script defer src="js/main.js"></script>
 </head>
@@ -120,6 +121,37 @@
         <div class="tab-pane fade" id="nav-countdown" role="tabpanel" aria-labelledby="nav-countdown-tab">
             <div class="d-flex flex-column justify-content-center">
                 <h3 class="display-1">Countdown</h3>
+                <form action="javascript:void(0);" onsubmit="event.preventDefault()">
+                    <input list="countdownHours" id="countdownHoursOptions" placeholder="Hours">
+                    <datalist id="countdownHours">
+                        <option value="">-- Selecciona una hora --</option>
+                    </datalist>
+
+
+                    <input list="countdownMinutes" id="countdownMinutesOptions" placeholder="Minutes">
+                    <datalist id="countdownMinutes">
+                        <option value="">-- Selecciona los minutos --</option>
+                    </datalist>
+
+                    <input list="countdownSeconds" id="countdownSecondsOptions" placeholder="Seconds">
+                    <datalist id="countdownSeconds">
+                        <option value="">-- Selecciona los segundos --</option>
+                    </datalist>
+
+                    <button type="submit" id="setCountdown" class="btn btn-info">Set alarm time</button>
+                </form>
+
+                <div>
+                    <p id="lap">
+                        <span id="cdhours">00</span>
+                        :
+                        <span id="cdminutes">00</span>
+                        :
+                        <span id="cdseconds">00</span>
+                    </p>
+                </div>
+
+
             </div>
         </div>
     </div>
